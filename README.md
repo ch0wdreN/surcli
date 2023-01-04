@@ -1,5 +1,8 @@
 # surcli
 
+surrealDBにコマンドラインから触るためのCLIツール
+現在はファイルをもらっている状態だからdbcli的な感じで対話環境を実装したい
+
 ```
 Usage: surcli [OPTIONS] --namespace <TEXT> --dbname <TEXT> --file <FILE>
 
