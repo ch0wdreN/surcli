@@ -2,8 +2,8 @@ use clap::Parser;
 use reqwest::blocking;
 use reqwest::header::{HeaderMap, HeaderValue, ACCEPT};
 use std::fs::File;
-use std::io::prelude::*;
-use std::io::{stdin, stdout};
+use std::io::prelude::Read;
+use std::io::{stdin, stdout, Write};
 use std::path::Path;
 use surcli::cli::Cli;
 
@@ -61,6 +61,10 @@ fn main() {
         stdout().flush().unwrap();
         let mut line = String::new();
         stdin().read_line(&mut line).expect("failed to read line");
+        let input: String = line.parse().expect("input parse error");
+        if input.trim_end().to_owned() == String::from("exit") {
+            std::process::exit(0);
+        }
         let res = fetch(req_url.clone(), headers.clone(), line).unwrap();
         println!("{}", res);
     }
